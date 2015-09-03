@@ -1,0 +1,8 @@
+## Interface: 60200
+## Title: BinderLabels
+## Version 0.0.1
+## Author: Drenos @ EU-Darkmoon Faire
+## Dependencies: Binder
+## OptionalDeps: Binder
+## LoadWith: Binder
+BinderLabels.lua
