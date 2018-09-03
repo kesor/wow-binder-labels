@@ -8,9 +8,10 @@ if not _G["Binder"] then error("Binder is required for BinderLabels!") end
 
 function BinderLabels:GetTextFor(button_action)
     spellType, spellId, _ = GetActionInfo(button_action);
-    if ( spellType == "spell" ) then
+    if ( spellType == "spell" or spellType == "item" ) then
         local spellName, _, _, _, _, _, _ = GetSpellInfo(spellId);
         text = _G["Binder"]:GetKeyForAction(spellName);
+        text = string.gsub(text, "ALT", "A");
         text = string.gsub(text, "CTRL", "C");
         text = string.gsub(text, "SHIFT", "S");
         return text;
