@@ -19,9 +19,33 @@ function BinderLabels:GetTextFor(button_action)
     return ""
 end
 
-hooksecurefunc("ActionButton_Update", function(btn)
-    actionName = _G[btn:GetName().."Name"]
-    if actionName then
-        actionName:SetText ( BinderLabels:GetTextFor(btn.action) )
+function updateButtonTextBliz(btn)
+    if btn.Name then
+        btn.Name:SetText(BinderLabels:GetTextFor(btn.action))
     end
-end)
+end
+
+function updateButtonTextLibActionButton(event, btn)
+    if btn then
+        btn.HotKey:SetText("")
+        if btn:HasAction() then
+            local _, action = btn:GetAction()
+            btn.HotKey:SetText(BinderLabels:GetTextFor(action))
+        end
+        btn.HotKey:Show()
+    end
+end
+
+-- Make Blizzard Action Bar Buttons show Binder keys
+hooksecurefunc("ActionButton_Update", updateButtonTextBliz)
+
+-- Make LibActionBar-1.0 Action Bar Buttons show Binder keys
+local LibStub = _G["LibStub"]
+if LibStub and (LibStub.libs["LibActionButton-1.0"] or LibStub.libs["LibActionButton-1.0-ElvUI"]) then
+    local LAB = LibStub.libs["LibActionButton-1.0"]
+    if not LAB then
+        LAB = LibStub.libs["LibActionButton-1.0-ElvUI"]
+    end
+    LAB:RegisterCallback("OnButtonCreated", updateButtonTextLibActionButton)
+    LAB:RegisterCallback("OnButtonUpdate", updateButtonTextLibActionButton)
+end
