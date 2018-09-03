@@ -1,8 +1,8 @@
-## Interface: 70000
+## Interface: 80000
 ## Title: BinderLabels
 ## Version 0.0.1
 ## Author: Drenos @ EU-Darkmoon Faire
 ## Dependencies: Binder
-## OptionalDeps: Binder
+## OptionalDeps: Binder, ElvUI, Bartender4
 ## LoadWith: Binder
 BinderLabels.lua
