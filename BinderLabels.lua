@@ -14,6 +14,7 @@ function BinderLabels:GetTextFor(button_action)
         text = string.gsub(text, "ALT", "A");
         text = string.gsub(text, "CTRL", "C");
         text = string.gsub(text, "SHIFT", "S");
+        text = string.gsub(text, "-", "");
         return text;
     end
     return ""
@@ -26,11 +27,13 @@ function updateButtonTextBliz(btn)
 end
 
 function updateButtonTextLibActionButton(event, btn)
-    if btn then
+    if btn and not HasTempShapeshiftActionBar() then
         btn.HotKey:SetText("")
         if btn:HasAction() then
             local _, action = btn:GetAction()
-            btn.HotKey:SetText(BinderLabels:GetTextFor(action))
+            if action then
+                btn.HotKey:SetText(BinderLabels:GetTextFor(action))
+            end
         end
         btn.HotKey:Show()
     end
