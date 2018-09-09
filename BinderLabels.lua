@@ -7,6 +7,11 @@ local x, BinderLabels = ...
 if not _G["Binder"] then error("Binder is required for BinderLabels!") end
 
 function BinderLabels:GetTextFor(button_action)
+    if type(button_action) ~= "number" then
+        -- probably a custom actionbar button
+        -- usually is a table with { tooltip:"Exit", func: Exit(), texture: Exit_Icon }
+        return ""
+    end
     spellType, spellId, _ = GetActionInfo(button_action);
     if ( spellType == "spell" or spellType == "item" ) then
         local spellName, _, _, _, _, _, _ = GetSpellInfo(spellId);
@@ -27,7 +32,7 @@ function updateButtonTextBliz(btn)
 end
 
 function updateButtonTextLibActionButton(event, btn)
-    if btn and not HasTempShapeshiftActionBar() then
+    if btn then
         btn.HotKey:SetText("")
         if btn:HasAction() then
             local _, action = btn:GetAction()
