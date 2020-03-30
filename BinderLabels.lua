@@ -28,6 +28,7 @@ end
 function updateButtonTextBliz(btn)
     if btn.Name then
         btn.Name:SetText(BinderLabels:GetTextFor(btn.action))
+        -- btn.HotKey:SetText(BinderLabels:GetTextFor(btn.action))
     end
 end
 
