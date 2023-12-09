@@ -27,7 +27,9 @@ end
 
 function updateButtonTextBliz(btn)
     if btn.Name then
-        btn.Name:SetText(BinderLabels:GetTextFor(btn.action))
+        -- btn.Name:SetText(BinderLabels:GetTextFor(btn.action))
+        btn.HotKey:SetText(BinderLabels:GetTextFor(btn.action))
+        btn.HotKey:Show()
     end
 end
 
@@ -45,7 +47,9 @@ function updateButtonTextLibActionButton(event, btn)
 end
 
 -- Make Blizzard Action Bar Buttons show Binder keys
-hooksecurefunc("ActionButton_Update", updateButtonTextBliz)
+for _, button in next, ActionBarButtonEventsFrame.frames do
+    hooksecurefunc(button, "Update", updateButtonTextBliz)
+end
 
 -- Make LibActionBar-1.0 Action Bar Buttons show Binder keys
 local LibStub = _G["LibStub"]
